@@ -1,0 +1,70 @@
+{% include 'customerheader.html'%}
+
+  <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="/static/img/carousel-1.jpg" alt="Image" style="height: 400px">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                          
+         <center>
+         	<h1 style="color: #d28330;margin-top: -150px">PRODUCTS</h1>
+	<form method="post">
+    
+			<table>
+				<tr>
+					<td><input type="text" placeholder="Search here..." name="product" class="form-control"></td>
+					<td><input type="submit" class="btn btn-success" name="search" style="margin-left: 6px;"></td>
+				</tr>
+			</table>
+	</form>
+	</form>
+</center>
+
+       </div></div></div></div></div></div>
+
+      
+        <div class="row portfolio-container" style="height: 400px;">
+{% for row in data['productsearch']%}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+
+          		
+            <div class="portfolio-wrap">
+              <figure>
+                <img src="/{{row['product_image']}}"   class="img-fluid" alt="" style="width: 400px;height: 200px;" />
+              </figure>
+
+              <div class="">
+               
+                <h6>Sub Category: {{row['subcategory_name'] }}</h6>
+               <!--  <h6>Color: {{row['color_name']}}</h6> -->
+                <h6>Brand: {{row['brand_name']}}</h6>
+                <h6 style="">Product: {{row['product_name']}}</h6>
+
+
+    	<h6>Description: {{row['product_description'] }}</h6>
+                 <h6>Rate: {{row['rate'] }}</h6>
+
+
+                 {% if row['stock'] | int > 0%}
+    		<td><a class="btn btn-success" href="customer_addtocart?pid={{row['product_id']}}&pname={{row['product_name']}}&pdis={{row['product_description']}}&pimg={{row['product_image']}}&pamo={{row['rate']}}&stock={{row['stock']}}">Add To Cart</a></td>
+
+    		{% elif row['stock'] | int <= 0%}
+
+   
+            <td><a class="btn btn-success" href="#">Out  Of  Stock</a></td> 
+             {% endif %}
+         
+              </div>
+            </div>
+           
+          </div>
+ {% endfor %}
+         
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+{% include 'footer.html'%}
